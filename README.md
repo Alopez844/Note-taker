@@ -4,7 +4,9 @@
 This app will allow users to input notes for themselves and will automatically save. The saved notes will show up on th left side of the application. The user will also be able to delete notes if they would like to do so.
 
 # Installation 
-npm i 
+npm i express
+
+npm i uuid
 
 npm i inquirer
 
