@@ -1,30 +1,21 @@
-const router = require('express').Router();
+const notesData = require('../db/db.json');
+const uniqid = require('uniqid');
+const fs = require('fs');
 
-const saveData = require('../db/saveData');
+module.exports = (app) => {
+  app.get('/api/notes', (req, res) => res.json(notesData));
 
-// GET request
-router.get('/notes', function (req, res) {
-    saveData
-        .retrieveNotes()
-        .then(notes => res.json(notes))
-        .catch(err => res.status(500).json(err));
-});
+  app.post('/api/notes', (req, res) => {
+    req.body['id'] = uniqid();
+    notesData.push(req.body);
+    res.json(true);
+    fs.writeFileSync('./db/db.json', JSON.stringify(notesData))
+  })
 
-// POST request
-router.post('/notes', (req, res) => {
-    saveData
-        .addNote(req.body)
-        .then((note) => res.json(note))
-        .catch(err => res.status(500).json(err));
-});
-
-// Bonus - DELETE request
-router.delete('/notes/:id', function (req, res) {
-    saveData
-        .deleteNote(req.params.id)
-        .then(() => res.json({ ok: true }))
-        .catch(err => res.status(500).json(err));
-});
-
-
-module.exports = router;
+  app.delete('/api/notes/:id', (req, res) => {
+    let findId = notesData.findIndex(x => x.id === req.params.id);
+    notesData.splice(findId, 1); 
+    fs.writeFileSync('./db/db.json', JSON.stringify(notesData));
+    res.end();
+  })
+}

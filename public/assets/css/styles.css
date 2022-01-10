@@ -4,17 +4,6 @@ html, body {
   padding: 0;
 }
 
-
-h1.display-4 {
-  font-size: 60pt;
-  letter-spacing: 1.5pt;
-}
-
-h4.subtitle {
-  font-size: 35pt;
-  letter-spacing: 1pt;
-}
-
 .save-note {
   display: none;
 }
@@ -46,7 +35,7 @@ h4.subtitle {
 }
 
 .note-title:read-only, .note-textarea:read-only {
-  color: #684;
+  color: #757575;
 }
 
 .list-container .card {
@@ -78,14 +67,4 @@ h4.subtitle {
   border-right: none;
   padding: 20px;
   cursor: pointer;
-  font-size: 24pt;
-  letter-spacing: 1pt;
-}
-
-.nav-bg {
-  background-color: teal !important;
-}
-
-.container-bg {
-  background-color: #f4eeff;
 }
